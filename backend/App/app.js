@@ -7,10 +7,10 @@ const cors = require('cors');
 const db = require('./utils/DatabaseConnection');
 
 let indexRouter = require('./routes/index');
+let exampleRouter = require('./routes/example');
 
 var app = express();
 app.use(cors());
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -23,6 +23,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/example', exampleRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
