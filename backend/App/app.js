@@ -4,8 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const cors = require('cors');
-const Sequelize = require('sequelize');
-const Op = Sequelize.Op;
+const db = require('./utils/DatabaseConnection');
 
 let indexRouter = require('./routes/index');
 

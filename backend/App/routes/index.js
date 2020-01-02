@@ -4,9 +4,6 @@ var router = express.Router();
 //example how to import model
 // let edges = require('./../model/graphDatabase.js');
 
-const Sequelize = require('sequelize');
-const Op = Sequelize.Op;
-
 router.get('/', function(req, res, next) {
 
   	res.send("it works!");
