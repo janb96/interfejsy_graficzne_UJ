@@ -24,24 +24,24 @@ class Language extends Component {
                             <tr>
                                 <td className="szerokosc50">
                                     <div className='col-8 m-center'>
-                                        <button type="button" className="btn btn-warning btn-lg btn-block">Polski</button>
+                                        <button type="button" className="btn btn-warning btn-lg btn-block"><h1>Polski</h1></button>
                                     </div>
                                 </td>
                                 <td className="szerokosc50">
                                     <div className='col-8 m-center'>
-                                        <button type="button" className="btn btn-warning btn-lg btn-block">English</button>
+                                        <button type="button" className="btn btn-warning btn-lg btn-block"><h1>English</h1></button>
                                     </div>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
                                     <div className='col-8 m-center'>
-                                        <button type="button" className="btn btn-warning btn-lg btn-block">German</button>
+                                        <button type="button" className="btn btn-warning btn-lg btn-block"><h1>German</h1></button>
                                     </div>
                                 </td>
                                 <td>
                                     <div className='col-8 m-center'>
-                                        <button type="button" className="btn btn-warning btn-lg btn-block">日本語</button>
+                                        <button type="button" className="btn btn-warning btn-lg btn-block"><h1>日本語</h1></button>
                                     </div>
                                 </td>
                             </tr>
