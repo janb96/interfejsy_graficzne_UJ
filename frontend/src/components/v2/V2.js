@@ -38,16 +38,16 @@ class V2 extends Component {
                     <br/>
                     <br/>
                     <br/>
-                    <br/>
-                    <br/>
-                    <div className="row">
-                        <div className="col-4">
-                            <button type="button" className="btn btn-danger btn-lg btn-block">Cofnij</button>
-                        </div>
-                        <div className="col-4">
-                        </div>
-                        <div className="col-4">
-                            <button type="button" className="btn btn-success btn-lg btn-block">Zatwierdź</button>
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-4">
+                                <button type="button" className="btn btn-danger btn-lg btn-block"><h1>Cofnij</h1></button>
+                            </div>
+                            <div className="col-4">
+                            </div>
+                            <div className="col-4">
+                                <button type="button" className="btn btn-success btn-lg btn-block"><h1>Zatwierdź</h1></button>
+                            </div>
                         </div>
                     </div>
                 </div>
