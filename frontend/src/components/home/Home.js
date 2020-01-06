@@ -27,7 +27,7 @@ class Home extends Component {
                         <div className="col-3">
                         </div>
                         <div className="col-6">
-                            <button type="button" className="btn btn-warning btn-lg btn-block">Language</button>
+                            <button type="button" className="btn btn-secondary btn-lg btn-block">Language</button>
                         </div>
                         <div className="col-3">
                         </div>
