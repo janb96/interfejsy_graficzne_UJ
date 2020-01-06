@@ -2,14 +2,21 @@ import React, {Component} from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import Home from './components/home/Home';
+
 import V1 from './components/v1/V1';
-import V3 from './components/v3/V3';
 import V2 from './components/v2/V2';
-import V4 from './components/v4/V4';
+
+import V3 from './components/v3/V3';
 import V3_simple from './components/v3/V3_simple';
 import V4_simple from './components/v4/V4_simple';
 import V5 from './components/v5/V5';
 import V5_simple from './components/v5/V5_simple';
+
+import V4 from './components/v4/V4';
+
+import V6 from './components/v6/V6';
+
+//https://onedrive.live.com/?authkey=%21AHKkFUYexN9ih%5FU&cid=9FFB083ADCCEB07E&id=9FFB083ADCCEB07E%2186803&parId=9FFB083ADCCEB07E%2186797&o=OneUp
 
 import './App.css';
 class App extends Component {
@@ -27,6 +34,7 @@ class App extends Component {
             <Route exact path='/v4-simple' component={V4_simple}/>
             <Route exact path='/v5' component={V5}/>
             <Route exact path='/v5-simple' component={V5_simple}/>
+            <Route exact path='/v6' component={V6}/>
           </Switch>
         </BrowserRouter>
     );
