@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-class V4 extends Component {
+class V4_simple extends Component {
 
     constructor() {
         super();
@@ -14,42 +14,40 @@ class V4 extends Component {
     render() {
         return (
             <div id="root">
-                <div id="reklama50">
-                    <h1 className="display-1">REKLAMA</h1>
-                </div>
-                <div id="dol50">
+                <div id="el33">
                     <h1 className="display-1">Aktywacja karty</h1>
                     <br/>
+                    <br/>
+                    <br/>
+                    <h1 className="display-1">Nowy PIN</h1>
+                    <br/>
                     <div className="row">
-                        <div className="col-4">
-                            <h4 className="display-4">Nowy PIN</h4>
-                        </div>
-                        <div className="col-8">
+                        <div className="col">
                             <div className="form-group">
                                 <input placeholder="Kod PIN" type="password" maxLength="4" id="pwd"></input>
                             </div>
                         </div>
                     </div>
+                    <br/>
+                    <h1 className="display-1">Powtórz PIN</h1>
+                    <br/>
                     <div className="row">
-                        <div className="col-4">
-                            <h4 className="display-4">Powtórz PIN</h4>
-                        </div>
-                        <div className="col-8">
+                        <div className="col">
                             <div className="form-group">
                                 <input placeholder="Powtórz kod PIN" type="repeat-password" maxLength="4" id="pwd"></input>
                             </div>
                         </div>
                     </div>
                     <br/>
+                    <br/>
+                    <br/>
                     <div className="container">
                         <div className="row">
-                            <div className="col-4">
-                                <button type="button" className="btn btn-danger btn-lg btn-block"><h1>Anuluj</h1></button>
+                            <div className="col-6">
+                                <button type="button" className="btn btn-danger btn-lg btn-block"><h1 className="display-3">Anuluj</h1></button>
                             </div>
-                            <div className="col-4">
-                            </div>
-                            <div className="col-4">
-                                <button type="button" className="btn btn-success btn-lg btn-block"><h1>Zatwierdź</h1></button>
+                            <div className="col-6">
+                                <button type="button" className="btn btn-success btn-lg btn-block"><h1 className="display-3">Zatwierdź</h1></button>
                             </div>
                         </div>
                     </div>
@@ -59,4 +57,4 @@ class V4 extends Component {
     }
 }
 
-export default V4;
+export default V4_simple;

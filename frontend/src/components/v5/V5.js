@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-class V4 extends Component {
+class V5 extends Component {
 
     constructor() {
         super();
@@ -18,7 +18,7 @@ class V4 extends Component {
                     <h1 className="display-1">REKLAMA</h1>
                 </div>
                 <div id="dol50">
-                    <h1 className="display-1">Aktywacja karty</h1>
+                    <h1 className="display-1">Zmiana PIN</h1>
                     <br/>
                     <div className="row">
                         <div className="col-4">
@@ -59,4 +59,4 @@ class V4 extends Component {
     }
 }
 
-export default V4;
+export default V5;
