@@ -52,6 +52,15 @@ input {
   	align-items: center;
 }
 
+#el33 {
+	background-color: orange;
+	height: 33%;
+	margin: auto;
+	width: 100%;
+	position: relative;
+	text-align: center;
+}
+
 #dol25 {
 	background-color: orange;
 	height: 25%;
@@ -78,17 +87,3 @@ input {
 	position: relative;
 	text-align: center;
 }
-
-.button {
-  background-color: #4CAF50; /* Green */
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  margin: 4px 2px;
-  cursor: pointer;
-}
-
-.button1 {font-size: 10px;}
