@@ -5,21 +5,25 @@ import Home from './components/home/Home';
 
 import V1 from './components/v1/V1';
 import V2 from './components/v2/V2';
-
 import V3 from './components/v3/V3';
 import V3_simple from './components/v3/V3_simple';
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 import V4 from './components/v4/V4';
 import V4_simple from './components/v4/V4_simple';
+
 import V5 from './components/v5/V5';
 import V5_simple from './components/v5/V5_simple';
-
-
 import V6 from './components/v6/V6';
 
+<<<<<<< Updated upstream
+=======
 import V8 from './components/v8/V8';
 import V9 from './components/v9/V9';
 import V9_simple from "./components/v9/V9_simple";
+>>>>>>> Stashed changes
 
 import V11 from './components/v11/V11';
 import V11_simple from './components/v11/V11_simple';
@@ -52,6 +56,14 @@ class App extends Component {
             <Route exact path='/v5' component={V5}/>
             <Route exact path='/v5-simple' component={V5_simple}/>
             <Route exact path='/v6' component={V6}/>
+<<<<<<< Updated upstream
+            <Route exact path='/v7' component={V7}/>
+            <Route exact path='/v7-simple' component={V7_simple}/>
+            <Route exact path='/v10' component={V10}/>
+            <Route exact path='/v10-simple' component={V10_simple}/>
+            <Route exact path='/v12' component={V12}/>
+            <Route exact path='/v12-simple' component={V12_simple}/>
+=======
 
             <Route exact path='/v8' component={V8}/>
             <Route exact path='/v9' component={V9}/>
@@ -59,12 +71,7 @@ class App extends Component {
 
             <Route exact path='/v11' component={V11}/>
             <Route exact path='/v11-simple' component={V11_simple}/>
-            <Route exact path='/v7' component={V7}/>
-            <Route exact path='/v7-simple' component={V7_simple}/>
-            <Route exact path='/v10' component={V10}/>
-            <Route exact path='/v10-simple' component={V10_simple}/>
-            <Route exact path='/v12' component={V12}/>
-            <Route exact path='/v12-simple' component={V12_simple}/>
+>>>>>>> Stashed changes
           </Switch>
         </BrowserRouter>
     );
