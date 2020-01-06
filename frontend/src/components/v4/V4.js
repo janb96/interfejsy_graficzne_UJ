@@ -20,23 +20,25 @@ class V4 extends Component {
                 <div id="dol50">
                     <h1 className="display-1">Aktywacja karty</h1>
                     <br/>
-                    <div className="row">
-                        <div className="col-4">
-                            <h4 className="display-4">Nowy PIN</h4>
-                        </div>
-                        <div className="col-8">
-                            <div className="form-group">
-                                <input placeholder="Kod PIN" type="password" maxLength="4" id="pwd"></input>
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-4">
+                                <h4 className="display-4">Nowy PIN</h4>
+                            </div>
+                            <div className="col-8">
+                                <div className="form-group">
+                                    <input placeholder="Kod PIN" type="password" maxLength="4" id="pwd"></input>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div className="row">
-                        <div className="col-4">
-                            <h4 className="display-4">Powtórz PIN</h4>
-                        </div>
-                        <div className="col-8">
-                            <div className="form-group">
-                                <input placeholder="Powtórz kod PIN" type="repeat-password" maxLength="4" id="pwd"></input>
+                        <div className="row">
+                            <div className="col-4">
+                                <h4 className="display-4">Powtórz PIN</h4>
+                            </div>
+                            <div className="col-8">
+                                <div className="form-group">
+                                    <input placeholder="Powtórz kod PIN" type="repeat-password" maxLength="4" id="pwd"></input>
+                                </div>
                             </div>
                         </div>
                     </div>
