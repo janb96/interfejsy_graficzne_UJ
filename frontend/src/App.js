@@ -21,6 +21,9 @@ import V6 from './components/v6/V6';
 import V7 from './components/v7/V7';
 import V7_simple from './components/v7/V7_simple';
 
+import V10 from './components/v10/V10';
+import V10_simple from './components/v10/V10_simple';
+
 //https://onedrive.live.com/?authkey=%21AHKkFUYexN9ih%5FU&cid=9FFB083ADCCEB07E&id=9FFB083ADCCEB07E%2186803&parId=9FFB083ADCCEB07E%2186797&o=OneUp
 
 import './App.css';
@@ -42,6 +45,8 @@ class App extends Component {
             <Route exact path='/v6' component={V6}/>
             <Route exact path='/v7' component={V7}/>
             <Route exact path='/v7-simple' component={V7_simple}/>
+            <Route exact path='/v10' component={V10}/>
+            <Route exact path='/v10-simple' component={V10_simple}/>
           </Switch>
         </BrowserRouter>
     );
