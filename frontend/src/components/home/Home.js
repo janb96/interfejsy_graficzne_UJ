@@ -16,16 +16,21 @@ class Home extends Component {
 
     render() {
         return (
-            <div className="container-fluid">
-                <div className="row">
-                    <div className="col-4">
-                        1 it works
-                    </div>
-                    <div className="col-4">
-                        2 it works
-                    </div>
-                    <div className="col-4">
-                        3 it works
+            <div id="root">
+                <div id="reklama75">
+                    <h1 className="display-1">REKLAMA</h1>
+                </div>
+                <div id="dol25">
+                    <h1 className="display-1">Wprowadź kartę</h1>
+                    <br/>
+                    <div className="row">
+                        <div className="col-3">
+                        </div>
+                        <div className="col-6">
+                            <button type="button" className="btn btn-warning btn-lg btn-block">Language</button>
+                        </div>
+                        <div className="col-3">
+                        </div>
                     </div>
                 </div>
             </div>
