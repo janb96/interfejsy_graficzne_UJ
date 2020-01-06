@@ -18,7 +18,6 @@ class V4_simple extends Component {
                     <h1 className="display-1">Aktywacja karty</h1>
                     <br/>
                     <br/>
-                    <br/>
                     <h1 className="display-1">Nowy PIN</h1>
                     <br/>
                     <div className="row">
@@ -34,11 +33,10 @@ class V4_simple extends Component {
                     <div className="row">
                         <div className="col">
                             <div className="form-group">
-                                <input placeholder="Powtórz kod PIN" type="repeat-password" maxLength="4" id="pwd"></input>
+                                <input placeholder="Powtórz kod PIN" type="password" maxLength="4" id="pwd"></input>
                             </div>
                         </div>
                     </div>
-                    <br/>
                     <br/>
                     <br/>
                     <div className="container">
