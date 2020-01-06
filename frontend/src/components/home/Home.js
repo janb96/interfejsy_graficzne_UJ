@@ -22,12 +22,11 @@ class Home extends Component {
                 </div>
                 <div id="dol25">
                     <h1 className="display-1">Wprowadź kartę</h1>
-                    <br/>
                     <div className="row">
                         <div className="col-3">
                         </div>
                         <div className="col-6">
-                            <button type="button" className="btn btn-secondary btn-lg btn-block">Language</button>
+                            <button type="button" className="btn btn-secondary btn-lg btn-block"><h1>Language</h1></button>
                         </div>
                         <div className="col-3">
                         </div>
