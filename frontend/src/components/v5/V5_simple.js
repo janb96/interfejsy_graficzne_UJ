@@ -39,7 +39,7 @@ class V5_simple extends Component {
                         <div className="row">
                             <div className="col">
                                 <div className="form-group">
-                                    <input placeholder="Powtórz kod PIN" type="repeat-password" maxLength="4" id="pwd"></input>
+                                    <input placeholder="Powtórz kod PIN" type="password" maxLength="4" id="pwd"></input>
                                 </div>
                             </div>
                         </div>
