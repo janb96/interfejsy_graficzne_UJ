@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Link} from "react-router-dom";
 
 class V11_simple extends Component {
 
@@ -29,7 +30,7 @@ class V11_simple extends Component {
                     <div className="container">
                         <div className="row">
                             <div className="col">
-                                <button type="button" className="btn btn-success btn-lg btn-block"><h1 className="display-1">Zatwierdź</h1></button>
+                                <Link to={'/'}><button type="button" className="btn btn-success btn-lg btn-block"><h1 className="display-1">Zatwierdź</h1></button></Link>
                             </div>
                         </div>
                     </div>

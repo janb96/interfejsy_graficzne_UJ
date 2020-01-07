@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Link} from "react-router-dom";
 
 class V9 extends Component {
 
@@ -23,12 +24,12 @@ class V9 extends Component {
                     <div className="container">
                         <div className="row">
                             <div className="col-4">
-                                <button type="button" className="btn btn-danger btn-lg btn-block"><h1>NIE</h1></button>
+                                <Link to={'/v11'}><button type="button" className="btn btn-danger btn-lg btn-block"><h1>NIE</h1></button></Link>
                             </div>
                             <div className="col-4">
                             </div>
                             <div className="col-4">
-                                <button type="button" className="btn btn-success btn-lg btn-block"><h1>TAK</h1></button>
+                                <Link to={'/v11'}><button type="button" className="btn btn-success btn-lg btn-block"><h1>TAK</h1></button></Link>
                             </div>
                         </div>
                     </div>

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import {Link, withRouter} from "react-router-dom";
 
 class V6 extends Component {
 
@@ -41,7 +42,7 @@ class V6 extends Component {
                     <div className="container">
                         <div className="row">
                             <div className="col-4">
-                                <button type="button" className="btn btn-danger btn-lg btn-block"><h1>Powrót</h1></button>
+                                <button type="button" className="btn btn-danger btn-lg btn-block" onClick={this.props.history.goBack}><h1>Powrót</h1></button>
                             </div>
                             <div className="col-4">
                             </div>
@@ -55,4 +56,4 @@ class V6 extends Component {
     }
 }
 
-export default V6;
+export default withRouter(V6);

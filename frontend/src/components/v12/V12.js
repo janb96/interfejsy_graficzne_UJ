@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import {Link} from "react-router-dom";
 
 class V12 extends Component {
 
@@ -32,7 +33,7 @@ class V12 extends Component {
                             <div className="col-6">
                             </div>
                             <div className="col-6">
-                                <button type="button" className="btn btn-success btn-lg btn-block"><h1>Zatwierdź</h1></button>
+                                <Link to={'/v3'}><button type="button" className="btn btn-success btn-lg btn-block"><h1>Zatwierdź</h1></button></Link>
                             </div>
                         </div>
 

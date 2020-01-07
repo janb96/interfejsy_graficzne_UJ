@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import { withRouter } from 'react-router-dom';
+import {Link} from "react-router-dom";
 
 class V4 extends Component {
 
@@ -46,12 +48,12 @@ class V4 extends Component {
                     <div className="container">
                         <div className="row">
                             <div className="col-4">
-                                <button type="button" className="btn btn-danger btn-lg btn-block"><h1>Anuluj</h1></button>
+                                <button type="button" className="btn btn-danger btn-lg btn-block" onClick={this.props.history.goBack}><h1>Anuluj</h1></button>
                             </div>
                             <div className="col-4">
                             </div>
                             <div className="col-4">
-                                <button type="button" className="btn btn-success btn-lg btn-block"><h1>Zatwierdź</h1></button>
+                                <Link to={'/v3'}><button type="button" className="btn btn-success btn-lg btn-block"><h1>Zatwierdź</h1></button></Link>
                             </div>
                         </div>
                     </div>
@@ -61,4 +63,4 @@ class V4 extends Component {
     }
 }
 
-export default V4;
+export default withRouter(V4);
