@@ -47,7 +47,7 @@ class V1 extends Component {
                             <div className="col-4">
                             </div>
                             <div className="col-4">
-                                <button type="button" className="btn btn-success btn-lg btn-block"><h1>Zatwierdź</h1></button>
+                                <Link to={'/v3'}><button type="button" className="btn btn-success btn-lg btn-block"><h1>Zatwierdź</h1></button></Link>
                             </div>
                         </div>
                     </div>
