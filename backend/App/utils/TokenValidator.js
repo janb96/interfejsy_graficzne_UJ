@@ -20,7 +20,7 @@ function verifyToken(req, res, next) {
                 .send(ApiUtils.getApiResponse(config.apiErrorType, "Token could not be verified successfully: " + error.message));
             return;
         }
-        req.userId = decoded.id;
+        req.cardId = decoded.cardId;
         next();
     });
 }

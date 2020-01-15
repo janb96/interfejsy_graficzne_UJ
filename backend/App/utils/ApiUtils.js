@@ -11,6 +11,13 @@ exports.getApiResponse = function (type, payload) {
     return new ApiResponse(type, payload)
 };
 
+exports.sendApiResponse = function (res, code, payload) {
+    res
+        .status(code)
+        .send(JSON.stringify(this.getApiResponse(config.apiResponseType, payload)))
+        .end();
+};
+
 exports.sendApiToken = function (res, code, payload) {
     res
         .status(code)
