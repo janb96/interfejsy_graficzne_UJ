@@ -7,4 +7,8 @@ module.exports = {
     //JWT
     'jwtSecret': 'superSecretKeyForTokens',
     'jwtTime': 3600,
+
+    //ATM
+    'minPinDigits': 4,
+    'maxPinDigits': 6
 };
