@@ -16,7 +16,7 @@ const ClientSchema = new mongoose.Schema({
         default: 0
     },
     pinCode: {
-        type: String,
+        type: Number,
         required: true
     },
     isBlocked: {

@@ -1,6 +1,8 @@
 let express = require('express');
 let router = express.Router();
 
+let config = require('../config');
+
 let ClientModel = require("../model/Client");
 let ApiUtils = require('../utils/ApiUtils');
 let TokenValidator = require('../utils/TokenValidator');
@@ -44,7 +46,6 @@ router.get('/balance', TokenValidator, function (req, res, next) {
         });
 });
 
-//TODO test when database will be up
 router.patch('/card/pin', TokenValidator, function (req, res, next) {
     let cardId = req.cardId;
 
@@ -61,12 +62,12 @@ router.patch('/card/pin', TokenValidator, function (req, res, next) {
         return;
     }
 
-    if (oldPinCode.length < config.minPinDigits) {
+    if (oldPinCode.toString().length < config.minPinDigits) {
         ApiUtils.sendApiError(res, 500, "Field 'oldPinCode' has to have minimum " + config.minPinDigits + " digits!");
         return;
     }
 
-    if (oldPinCode.length > config.maxPinDigits) {
+    if (oldPinCode.toString().length > config.maxPinDigits) {
         ApiUtils.sendApiError(res, 500, "Field 'oldPinCode' has to have maximum " + config.maxPinDigits + " digits!");
         return;
     }
@@ -81,12 +82,12 @@ router.patch('/card/pin', TokenValidator, function (req, res, next) {
         return;
     }
 
-    if (newPinCode.length < config.minPinDigits) {
+    if (newPinCode.toString().length < config.minPinDigits) {
         ApiUtils.sendApiError(res, 500, "Field 'newPinCode' has to have minimum " + config.minPinDigits + " digits!");
         return;
     }
 
-    if (newPinCode.length > config.maxPinDigits) {
+    if (newPinCode.toString().length > config.maxPinDigits) {
         ApiUtils.sendApiError(res, 500, "Field 'newPinCode' has to have maximum " + config.maxPinDigits + " digits!");
         return;
     }
@@ -133,7 +134,6 @@ router.patch('/card/pin', TokenValidator, function (req, res, next) {
         });
 });
 
-//TODO test when database will be up
 router.post('/card/activate', TokenValidator, function (req, res, next) {
     let cardId = req.cardId;
 
@@ -150,12 +150,12 @@ router.post('/card/activate', TokenValidator, function (req, res, next) {
         return;
     }
 
-    if (oldPinCode.length < config.minPinDigits) {
+    if (oldPinCode.toString().length < config.minPinDigits) {
         ApiUtils.sendApiError(res, 500, "Field 'oldPinCode' has to have minimum " + config.minPinDigits + " digits!");
         return;
     }
 
-    if (oldPinCode.length > config.maxPinDigits) {
+    if (oldPinCode.toString().length > config.maxPinDigits) {
         ApiUtils.sendApiError(res, 500, "Field 'oldPinCode' has to have maximum " + config.maxPinDigits + " digits!");
         return;
     }
@@ -170,12 +170,12 @@ router.post('/card/activate', TokenValidator, function (req, res, next) {
         return;
     }
 
-    if (newPinCode.length < config.minPinDigits) {
+    if (newPinCode.toString().length < config.minPinDigits) {
         ApiUtils.sendApiError(res, 500, "Field 'newPinCode' has to have minimum " + config.minPinDigits + " digits!");
         return;
     }
 
-    if (newPinCode.length > config.maxPinDigits) {
+    if (newPinCode.toString().length > config.maxPinDigits) {
         ApiUtils.sendApiError(res, 500, "Field 'newPinCode' has to have maximum " + config.maxPinDigits + " digits!");
         return;
     }
@@ -216,7 +216,7 @@ router.post('/card/activate', TokenValidator, function (req, res, next) {
                         }
 
                         if (data.nModified !== 1) {
-                            ApiUtils.sendApiError(res, 500, "Card is active now.");
+                            ApiUtils.sendApiError(res, 500, "Error during card activation");
                             return;
                         }
 
@@ -226,22 +226,25 @@ router.post('/card/activate', TokenValidator, function (req, res, next) {
 });
 
 //ONLY FOR TESTS - DO NOT USE
-router.post('/', function (req, res, next) {
+router.post('/init', function (req, res, next) {
+    let clients = [
+        {
+            cardId: 1234123412341234,
+            pinCode: 6666,
+            balance: 12543,
+            expirationDate: '2022-01-01'
+        }
+    ];
+
     ClientModel
-        .create(
-            {
-                cardId: 1234123412341234,
-                pinCode: 6666,
-                balance: 12543,
-                expirationDate: '2022-01-01'
-            },
-            function (err, candies) {
-                if (err) {
-                    ApiUtils.sendApiError(res, 500, err.message);
-                    return;
-                }
-                ApiUtils.sendApiResponse(res, 200, true)
-            });
+        .insertMany(clients, function (error, clients) {
+            if (error) {
+                ApiUtils.sendApiError(res, 500, error.message);
+                return;
+            }
+
+            ApiUtils.sendApiResponse(res, 200, true)
+        });
 });
 
 module.exports = router;

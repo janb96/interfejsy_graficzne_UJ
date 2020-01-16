@@ -36,12 +36,12 @@ router.post('/authenticate', function (req, res, next) {
         return;
     }
 
-    if (pinCode.length < config.minPinDigits) {
+    if (pinCode.toString().length < config.minPinDigits) {
         ApiUtils.sendApiError(res, 500, "Field 'pinCode' has to have minimum " + config.minPinDigits + " digits!");
         return;
     }
-    
-    if (pinCode.length > config.maxPinDigits) {
+
+    if (pinCode.toString().length > config.maxPinDigits) {
         ApiUtils.sendApiError(res, 500, "Field 'pinCode' has to have maximum " + config.maxPinDigits + " digits!");
         return;
     }
@@ -63,12 +63,15 @@ router.post('/authenticate', function (req, res, next) {
                 return;
             }
 
+            if (new Date(client.expirationDate) < new Date()) {
+                ApiUtils.sendApiError(res, 500, "Your card expired.");
+                return;
+            }
+
             if (client.pinCode !== pinCode) {
                 ApiUtils.sendApiError(res, 500, "PIN code is invalid.");
                 return;
             }
-
-            //TODO check expiration date
 
             let token = jwt.sign({cardId: cardId}, config.jwtSecret, {expiresIn: config.jwtTime});
 
