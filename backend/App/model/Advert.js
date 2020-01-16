@@ -1,14 +1,12 @@
 let mongoose = require('mongoose');
 
 const AdvertSchema = new mongoose.Schema({
-    adId: {
-        type: Number,
-        required: true,
-        unique: true
-    },
     link: {
         type: String,
         required: true
+    },
+    description: {
+        type: String
     },
     minMoney: {
         type: Number,
