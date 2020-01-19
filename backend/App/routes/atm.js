@@ -52,6 +52,11 @@ router.post('/withdraw', TokenValidator, function (req, res, next) {
                 return;
             }
 
+            if (!client.isActive) {
+                ApiUtils.sendApiError(res, 500, "Your card is not active.");
+                return;
+            }
+
             let balance = client.balance;
             let moneyInOneTransactionLimit = client.limits.moneyInOneTransaction;
 

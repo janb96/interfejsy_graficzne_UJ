@@ -42,6 +42,11 @@ router.get('/balance', TokenValidator, function (req, res, next) {
                 return;
             }
 
+            if (!client.isActive) {
+                ApiUtils.sendApiError(res, 500, "Your card is not active.");
+                return;
+            }
+
             ApiUtils.sendApiResponse(res, 200, client.balance)
         });
 });
@@ -232,7 +237,14 @@ router.post('/init', function (req, res, next) {
             cardId: 1234123412341234,
             pinCode: 6666,
             balance: 12543,
-            expirationDate: '2022-01-01'
+            expirationDate: '2022-01-01',
+            isActive: false,
+            isBlock: false,
+            limits: {
+                moneyInOneTransaction: 4000,
+                moneyInOneDay: 5000,
+                transactionPerDay: 2
+            }
         }
     ];
 
