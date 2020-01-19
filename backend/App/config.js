@@ -10,5 +10,8 @@ module.exports = {
 
     //ATM
     'minPinDigits': 4,
-    'maxPinDigits': 6
+    'maxPinDigits': 6,
+    'minDenomination': 50,
+    'minWithdraw': 50,
+    'maxWithdraw': 10000,
 };
