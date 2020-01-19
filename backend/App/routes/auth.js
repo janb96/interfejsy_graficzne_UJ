@@ -5,6 +5,7 @@ let jwt = require('jsonwebtoken');
 let config = require('../config');
 
 let ClientModel = require("../model/Client");
+let LogModel = require("../model/Log");
 let ApiUtils = require('../utils/ApiUtils');
 
 router.post('/authenticate', function (req, res, next) {
@@ -75,7 +76,20 @@ router.post('/authenticate', function (req, res, next) {
 
             let token = jwt.sign({cardId: cardId}, config.jwtSecret, {expiresIn: config.jwtTime});
 
-            ApiUtils.sendApiToken(res, 200, token);
+            let log = new LogModel({
+                cardId: cardId,
+                date: new Date(),
+                type: "log_in"
+            });
+
+            log.save(function (error) {
+                if (error) {
+                    ApiUtils.sendApiError(res, 500, error.message);
+                    return;
+                }
+
+                ApiUtils.sendApiToken(res, 200, token);
+            });
         });
 });
 
