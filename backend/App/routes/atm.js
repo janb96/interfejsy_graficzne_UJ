@@ -8,6 +8,7 @@ let config = require('../config');
 let TokenValidator = require('../utils/TokenValidator');
 let ATMModel = require("../model/ATM");
 let ClientModel = require("../model/Client");
+let LogModel = require("../model/Log");
 let ApiUtils = require('../utils/ApiUtils');
 let ATMUtils = require('../utils/ATMUtils');
 
@@ -143,7 +144,21 @@ router.post('/withdraw', TokenValidator, function (req, res, next) {
                                                 return;
                                             }
 
-                                            ApiUtils.sendApiResponse(res, 200, withdrawResult)
+                                            let log = new LogModel({
+                                                cardId: cardId,
+                                                date: new Date(),
+                                                type: "withdraw",
+                                                amount: amount
+                                            });
+
+                                            log.save(function (error) {
+                                                if (error) {
+                                                    ApiUtils.sendApiError(res, 500, error.message);
+                                                    return;
+                                                }
+
+                                                ApiUtils.sendApiResponse(res, 200, true)
+                                            });
                                         });
                             });
                 });

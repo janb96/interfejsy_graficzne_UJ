@@ -4,6 +4,7 @@ let router = express.Router();
 let config = require('../config');
 
 let ClientModel = require("../model/Client");
+let LogModel = require("../model/Log");
 let ApiUtils = require('../utils/ApiUtils');
 let TokenValidator = require('../utils/TokenValidator');
 
@@ -47,7 +48,20 @@ router.get('/balance', TokenValidator, function (req, res, next) {
                 return;
             }
 
-            ApiUtils.sendApiResponse(res, 200, client.balance)
+            let log = new LogModel({
+                cardId: cardId,
+                date: new Date(),
+                type: "check_balance"
+            });
+
+            log.save(function (error) {
+                if (error) {
+                    ApiUtils.sendApiError(res, 500, error.message);
+                    return;
+                }
+
+                ApiUtils.sendApiResponse(res, 200, client.balance)
+            });
         });
 });
 
@@ -134,7 +148,20 @@ router.patch('/card/pin', TokenValidator, function (req, res, next) {
                             return;
                         }
 
-                        ApiUtils.sendApiResponse(res, 200, true)
+                        let log = new LogModel({
+                            cardId: cardId,
+                            date: new Date(),
+                            type: "change_pin"
+                        });
+
+                        log.save(function (error) {
+                            if (error) {
+                                ApiUtils.sendApiError(res, 500, error.message);
+                                return;
+                            }
+
+                            ApiUtils.sendApiResponse(res, 200, true)
+                        });
                     });
         });
 });
@@ -225,7 +252,20 @@ router.post('/card/activate', TokenValidator, function (req, res, next) {
                             return;
                         }
 
-                        ApiUtils.sendApiResponse(res, 200, true)
+                        let log = new LogModel({
+                            cardId: cardId,
+                            date: new Date(),
+                            type: "activate_card"
+                        });
+
+                        log.save(function (error) {
+                            if (error) {
+                                ApiUtils.sendApiError(res, 500, error.message);
+                                return;
+                            }
+
+                            ApiUtils.sendApiResponse(res, 200, true)
+                        });
                     });
         });
 });
