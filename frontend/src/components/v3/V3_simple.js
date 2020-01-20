@@ -1,13 +1,28 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import {Link} from "react-router-dom";
+import swal from "sweetalert";
 
 class V3_simple extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
         };
+
+        this.unlog = this.unlog.bind(this);
+        if (window.sessionStorage.getItem("token") == null) {
+            swal("Musisz być zalogowany");
+            props.history.push('/');
+        }
+
+    }
+
+    unlog()
+    {
+        window.sessionStorage.removeItem("token");
+        this.props.history.push('/');
+
     }
 
     componentDidMount() {
@@ -26,7 +41,7 @@ class V3_simple extends Component {
                                 <Link to={'/v3'}><button type="button" className="btn btn-secondary btn-lg btn-block"><h1 className="display-1">Widok standardowy</h1></button></Link>
                             </div>
                             <div className="col-6">
-                                <Link to={'/'}><button type="button" className="btn btn-danger btn-lg btn-block"><h1 className="display-1">Zakończ transakcje</h1></button></Link>
+                                <Link to={'/'}><button type="button" onClick={this.unlog} className="btn btn-danger btn-lg btn-block"><h1 className="display-1">Zakończ transakcje</h1></button></Link>
                             </div>
                         </div>
                     </div>

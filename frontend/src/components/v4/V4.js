@@ -1,16 +1,68 @@
 import React, {Component} from 'react';
 import { withRouter } from 'react-router-dom';
 import {Link} from "react-router-dom";
-
+import swal from 'sweetalert';
 class V4 extends Component {
 
-    constructor() {
+    constructor(props) {
         super();
+
+        this.handleChangePin1 = this.handleChangePin1.bind(this);
+        this.handleChangePin2 = this.handleChangePin2.bind(this);
+
+        this.activateCard = this.activateCard.bind(this);
+
+
         this.state = {
+            pinCode1: "",
+            pinCode2: ""
         };
+
+        if (window.sessionStorage.getItem("token") == null) {
+            swal("Musisz być zalogowany");
+            props.history.push('/');
+        }
+
     }
 
     componentDidMount() {
+    }
+
+    activateCard()
+    {
+        let pinCode1 = this.state.pinCode1;
+        let pinCode2 = this.state.pinCode2;
+
+        console.log(pinCode1);
+        console.log(pinCode2);
+
+        if(pinCode1 == undefined || pinCode2 == undefined)
+        {
+            swal("Podaj kod Pin w obu polach.")
+        }
+        else
+        if(pinCode2 !== pinCode1 )
+        {
+            swal("W obu polach musi być ten sam kod Pin")
+        }
+        else
+        {
+            const data = {
+                pinCode: pinCode1
+            };
+
+
+
+
+
+        }
+    }
+
+    handleChangePin1(event){
+        this.setState({pinCode1: event.target.value});
+    }
+    handleChangePin2(event){
+        this.setState({pinCode2: event.target.value});
     }
 
     render() {
@@ -29,7 +81,7 @@ class V4 extends Component {
                             </div>
                             <div className="col-8">
                                 <div className="form-group">
-                                    <input placeholder="Kod PIN" type="password" maxLength="4" id="pwd"></input>
+                                    <input onChange={this.handleChangePin1} placeholder="Kod PIN" type="password" maxLength="4" id="pwd"></input>
                                 </div>
                             </div>
                         </div>
@@ -39,7 +91,7 @@ class V4 extends Component {
                             </div>
                             <div className="col-8">
                                 <div className="form-group">
-                                    <input placeholder="Powtórz kod PIN" type="password" maxLength="4" id="pwd"></input>
+                                    <input onChange={this.handleChangePin2} placeholder="Powtórz kod PIN" type="password" maxLength="4" id="pwd"></input>
                                 </div>
                             </div>
                         </div>
@@ -53,7 +105,7 @@ class V4 extends Component {
                             <div className="col-4">
                             </div>
                             <div className="col-4">
-                                <Link to={'/v3'}><button type="button" className="btn btn-success btn-lg btn-block"><h1>Zatwierdź</h1></button></Link>
+                                <button type="button" className="btn btn-success btn-lg btn-block" onClick={this.activateCard}><h1>Zatwierdź</h1></button>
                             </div>
                         </div>
                     </div>

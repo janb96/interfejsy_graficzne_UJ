@@ -1,13 +1,19 @@
 import React, {Component} from 'react';
 import { withRouter } from 'react-router-dom';
 import {Link} from "react-router-dom";
+import swal from "sweetalert";
 
 class V4_simple extends Component {
 
-    constructor() {
+    constructor(props) {
         super();
         this.state = {
         };
+
+        if (window.sessionStorage.getItem("token") == null) {
+            swal("Musisz być zalogowany");
+            props.history.push('/');
+        }
     }
 
     componentDidMount() {

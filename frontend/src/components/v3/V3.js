@@ -1,18 +1,30 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import {Link} from "react-router-dom";
+import swal from 'sweetalert';
 
 class V3 extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
         };
+
+        this.unlog = this.unlog.bind(this);
+        if (window.sessionStorage.getItem("token") == null) {
+            swal("Musisz być zalogowany");
+            props.history.push('/');
+        }
     }
 
     componentDidMount() {
 
-        
+    }
+    unlog()
+    {
+        window.sessionStorage.removeItem("token");
+        this.props.history.push('/');
+
     }
 
     render() {
@@ -50,7 +62,7 @@ class V3 extends Component {
                         <br/>
                         <div className="row">
                             <div className="col-6">
-                                <Link to={'/'}><button type="button" className="btn btn-danger btn-lg btn-block"><h1>Zakończ</h1></button></Link>
+                                <button onClick={this.unlog} type="button" className="btn btn-danger btn-lg btn-block"><h1>Zakończ</h1></button>
                             </div>
                             <div className="col-6">
                             </div>

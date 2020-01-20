@@ -69,7 +69,10 @@ router.post('/authenticate', function (req, res, next) {
                 return;
             }
 
-            if (client.pinCode !== pinCode) {
+            if (client.pinCode !== parseInt(pinCode)) {
+                console.log(pinCode);
+                console.log(client.pinCode);
+
                 ApiUtils.sendApiError(res, 500, "PIN code is invalid.");
                 return;
             }
@@ -92,5 +95,7 @@ router.post('/authenticate', function (req, res, next) {
             });
         });
 });
+
+
 
 module.exports = router;
