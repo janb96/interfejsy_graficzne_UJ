@@ -38,19 +38,6 @@ class V3_simple extends Component {
                     <div className="container">
                         <div className="row">
                             <div className="col-6">
-                                <Link to={'/v3'}><button type="button" className="btn btn-secondary btn-lg btn-block"><h1 className="display-1">Widok standardowy</h1></button></Link>
-                            </div>
-                            <div className="col-6">
-                                <Link to={'/'}><button type="button" onClick={this.unlog} className="btn btn-danger btn-lg btn-block"><h1 className="display-1">Zakończ transakcje</h1></button></Link>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div id="el33">
-                    <br/>
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-6">
                                 <Link to={'/v4-simple'}><button type="button" className="btn btn-secondary btn-lg btn-block"><h1 className="display-1">Aktywacja karty</h1></button></Link>
                             </div>
                             <div className="col-6">
@@ -68,6 +55,19 @@ class V3_simple extends Component {
                             </div>
                             <div className="col-6">
                                 <Link to={'/v6'}><button type="button" className="btn btn-secondary btn-lg btn-block"><h1 className="display-1">Saldo konta <i class="fas fa-chart-line"></i></h1></button></Link>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="el33">
+                    <br/>
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-6">
+                                <Link to={'/'}><button type="button" onClick={this.unlog} className="btn btn-danger btn-lg btn-block"><h1 className="display-1">Zakończ transakcje</h1></button></Link>
+                            </div>
+                            <div className="col-6">
+                                <Link to={'/v3'}><button type="button" className="btn btn-secondary btn-lg btn-block"><h1 className="display-1">Widok standardowy</h1></button></Link>
                             </div>
                         </div>
                     </div>
