@@ -60,8 +60,8 @@ router.get('/personalized', TokenValidator, function (req, res, next) {
             AdvertModel
                 .find(
                     {
-                        minMoney: {$lt: clientMoney},
-                        maxMoney: {$gt: clientMoney}
+                        minMoney: {$lte: clientMoney},
+                        maxMoney: {$gte: clientMoney}
                     }, function (error, adverts) {
                         if (error) {
                             ApiUtils.sendApiError(res, 500, error.message);
