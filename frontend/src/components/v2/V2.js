@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './V2.css';
 import {Link} from "react-router-dom";
+import axios from "axios";
 
 class V2 extends Component {
 
@@ -10,14 +11,17 @@ class V2 extends Component {
         };
     }
 
-    componentDidMount() {
+    async componentDidMount() {
+        let imgResponse = await axios.get("http://localhost:4000/advert");
+        let addUrl = imgResponse.data.payload.link;
+        this.setState({url: addUrl});
     }
 
     render() {
         return (
             <div id="root">
                 <div id="reklama75">
-                    <h1 className="display-1">REKLAMA</h1>
+                    <img src={this.state.url}></img>
                 </div>
                 <div id="dol25">
                     <table className="table-borderless">
