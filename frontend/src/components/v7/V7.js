@@ -73,7 +73,7 @@ class V7 extends Component {
                 }
                 else
                 {
-                    swal("Błąd wypłaty - spróbuj ponownie później");
+                    swal("Błąd wypłaty - podaj poprawną kwotę spróbuj ponownie później");
                 }
             });
     }
