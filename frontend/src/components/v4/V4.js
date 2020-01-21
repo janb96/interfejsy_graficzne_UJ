@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import { withRouter } from 'react-router-dom';
 import {Link} from "react-router-dom";
 import swal from 'sweetalert';
+import axios from 'axios';
+
 class V4 extends Component {
 
     constructor(props) {
@@ -15,7 +17,9 @@ class V4 extends Component {
 
         this.state = {
             pinCode1: "",
-            pinCode2: ""
+            pinCode2: "",
+            token: window.sessionStorage.getItem("token"),
+            url: ""
         };
 
         if (window.sessionStorage.getItem("token") == null) {
@@ -25,7 +29,22 @@ class V4 extends Component {
 
     }
 
-    componentDidMount() {
+    async componentDidMount() {
+        let token = this.state.token;
+        let imgResponse = await axios.get(
+            "http://localhost:4000/advert/personalized", 
+            {
+                withCredentials: true,
+                headers: {
+                    'x-access-token': token,
+                    'Accept' : 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            }
+        );
+        let addUrl = imgResponse.data.payload.link;
+        this.setState({url: addUrl});
+
     }
 
     activateCard()
@@ -69,7 +88,7 @@ class V4 extends Component {
         return (
             <div id="root">
                 <div id="reklama50">
-                    <h1 className="display-1">REKLAMA</h1>
+                    <img src={this.state.url}></img>
                 </div>
                 <div id="dol50">
                     <h1 className="display-1">Aktywacja karty</h1>
