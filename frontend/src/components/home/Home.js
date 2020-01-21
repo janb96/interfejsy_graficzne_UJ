@@ -26,7 +26,7 @@ class Home extends Component {
                     <img src={this.state.url}></img>
                 </div>
                 <div id="dol25">
-                    <h1 className="display-1">Wprowadź kartę</h1>
+                    <h1 className="display-1"><Link to={"/v1"}>Wprowadź kartę</Link></h1>
                     <div className="row">
                         <div className="col-3">
                         </div>

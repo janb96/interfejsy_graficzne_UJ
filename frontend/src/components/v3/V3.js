@@ -21,6 +21,7 @@ class V3 extends Component {
 
     async componentDidMount() {
         let token = this.state.token;
+        console.log(this.state.token);
         let imgResponse = await axios.get(
             "http://localhost:4000/advert/personalized", 
             {
@@ -32,9 +33,13 @@ class V3 extends Component {
                 }
             }
         );
-        let addUrl = imgResponse.data.payload.link;
-        this.setState({url: addUrl});
 
+        try {
+            let addUrl = imgResponse.data.payload.link;
+            this.setState({url: addUrl});
+        } catch (err){
+            console.log(err);
+        }
     }
 
     unlog()
