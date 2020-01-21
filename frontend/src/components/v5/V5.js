@@ -10,12 +10,53 @@ class V5 extends Component {
         super();
         this.state = {
             token: window.sessionStorage.getItem("token"),
-            url: ""
+            url: "",
+            pinCode: "",
+            pinCode2: ""
         };
         if (window.sessionStorage.getItem("token") == null) {
             swal("Musisz być zalogowany");
             props.history.push('/');
         }
+
+        this.handlePinChange = this.handlePinChange.bind(this);
+        this.handlePin2Change = this.handlePin2Change.bind(this);
+
+        this.patchData = this.patchData.bind(this);
+    }
+
+    handlePinChange(event){
+        this.setState({pinCode: event.target.value});
+    }
+
+    handlePin2Change(event){
+        this.setState({pinCode2: event.target.value});
+    }
+
+    async patchData(){
+
+        let token = this.state.token;
+        console.log(token);
+        
+        if( this.state.pinCode != this.state.pinCode2 ) {
+            swal("Podane kody pin nie są takie same");
+        } else {
+            let response = await axios.patch(
+                "http://localhost:4000/client/card/pin", 
+                {
+                    withCredentials: true,
+                    headers: {
+                        'x-access-token': token,
+                        'Accept' : 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: {
+                        newPinCode: this.state.pinCode
+                    }
+                }
+            ).then(this.props.history.push('/v3'));
+        }
+
     }
 
     async componentDidMount() {
@@ -37,6 +78,10 @@ class V5 extends Component {
     }
 
     render() {
+
+        console.log(this.state.pinCode);
+        console.log(this.state.pinCode2);
+
         return (
             <div id="root">
                 <div id="reklama50">
@@ -52,7 +97,7 @@ class V5 extends Component {
                             </div>
                             <div className="col-8">
                                 <div className="form-group">
-                                    <input placeholder="Kod PIN" type="password" maxLength="4" id="pwd"></input>
+                                    <input placeholder="Kod PIN" onChange={this.handlePinChange} type="password" maxLength="4" id="pwd"></input>
                                 </div>
                             </div>
                         </div>
@@ -64,7 +109,7 @@ class V5 extends Component {
                             </div>
                             <div className="col-8">
                                 <div className="form-group">
-                                    <input placeholder="Powtórz kod PIN" type="password" maxLength="4" id="pwd"></input>
+                                    <input placeholder="Powtórz kod PIN" onChange={this.handlePin2Change} type="password" maxLength="4" id="pwd"></input>
                                 </div>
                             </div>
                         </div>
@@ -78,7 +123,7 @@ class V5 extends Component {
                             <div className="col-4">
                             </div>
                             <div className="col-4">
-                                <Link to={'/v12'}><button type="button" className="btn btn-success btn-lg btn-block"><h1>Zatwierdź</h1></button></Link>
+                                <button type="button" onClick={this.patchData} className="btn btn-success btn-lg btn-block"><h1>Zatwierdź</h1></button>
                             </div>
                         </div>
                     </div>
