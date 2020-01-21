@@ -2,13 +2,15 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import {Link} from "react-router-dom";
 import swal from 'sweetalert';
+
 class V1 extends Component {
 
     constructor(props) {
         super();
         this.state = {
             pinCode: "",
-            url: ""
+            url: "",
+            cardId: ""
         };
         this.handleChange = this.handleChange.bind(this);
         this.postData = this.postData.bind(this);
@@ -17,6 +19,7 @@ class V1 extends Component {
             swal("Już wprowadziłeś PIN. Ta strona jest dla ciebie niedostępna");
             props.history.push('/V3');
         }
+
     }
 
     async componentDidMount() {
@@ -24,14 +27,15 @@ class V1 extends Component {
         let imgResponse = await axios.get("http://localhost:4000/advert");
         let addUrl = imgResponse.data.payload.link;
         this.setState({url: addUrl});
-        
+        const enteredCardId = prompt('Numer karty:');
+        this.setState({"cardId": enteredCardId});
     }
 
      postData(){
         let pinCode = this.state.pinCode;
 
         const data = {
-            cardId: "4321432143214321",
+            cardId: this.state.cardId,
             pinCode: pinCode
         };
       //let response = await axios.post('http://localhost:4000/auth/authenticate' , data ).then(element => {console.log(element)});
