@@ -18,6 +18,13 @@ class V10 extends Component {
 
     }
 
+    async wait() {
+        let promise = new Promise((resolve, reject) => {
+            setTimeout(() => this.props.history.push('/V11'), 5000)
+          });
+
+    }
+
     async componentDidMount() {
         let token = this.state.token;
         let imgResponse = await axios.get(
@@ -34,14 +41,12 @@ class V10 extends Component {
         let addUrl = imgResponse.data.payload.link;
         this.setState({url: addUrl});
 
-        this.timer = setInterval(
-            () => this.props.history.push('/V11'),
-            5000,
-        );
+        this.wait();
 
     }
 
     render() {
+
         return (
             <div id="root">
                 <div id="reklama75">
