@@ -8,6 +8,7 @@ class V3 extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            url: ""
         };
 
         this.unlog = this.unlog.bind(this);
@@ -17,9 +18,24 @@ class V3 extends Component {
         }
     }
 
-    componentDidMount() {
+    async componentDidMount() {
+        let token = this.state.token;
+        let imgResponse = await axios.get(
+            "http://localhost:4000/advert/personalized",
+            {
+                withCredentials: true,
+                headers: {
+                    'x-access-token': token,
+                    'Accept' : 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            }
+        );
+        let addUrl = imgResponse.data.payload.link;
+        this.setState({url: addUrl});
 
     }
+
     unlog()
     {
         window.sessionStorage.removeItem("token");
@@ -30,8 +46,8 @@ class V3 extends Component {
     render() {
         return (
             <div id="root">
-                <div id="reklama25">
-                    <h1 className="display-1">REKLAMA</h1>
+                <div id="reklama50">
+                    <img src={this.state.url}></img>
                 </div>
                 <div id="dol75">
                     <div className="container">
