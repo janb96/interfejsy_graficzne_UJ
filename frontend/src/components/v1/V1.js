@@ -31,7 +31,7 @@ class V1 extends Component {
         let pinCode = this.state.pinCode;
 
         const data = {
-            cardId: "1234123412341234",
+            cardId: "4321432143214321",
             pinCode: pinCode
         };
       //let response = await axios.post('http://localhost:4000/auth/authenticate' , data ).then(element => {console.log(element)});
@@ -51,6 +51,7 @@ class V1 extends Component {
                 if(r.type === "token")
                 {
                     window.sessionStorage.setItem("token", r.payload);
+                    window.sessionStorage.setItem("cardId", r.payload);
                     this.props.history.push('/V3');
                 }
                 else

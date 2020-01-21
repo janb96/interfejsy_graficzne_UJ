@@ -8,19 +8,20 @@ class V6 extends Component {
         super();
         this.state = {
             token: window.sessionStorage.getItem("token"),
-            url: ""
+            url: "",
+            payload: ""
         };
     }
 
     async componentDidMount() {
         let token = this.state.token;
         let imgResponse = await axios.get(
-            "http://localhost:4000/advert/personalized", 
+            "http://localhost:4000/advert/personalized",
             {
                 withCredentials: true,
                 headers: {
                     'x-access-token': token,
-                    'Accept' : 'application/json',
+                    'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 }
             }
@@ -28,6 +29,29 @@ class V6 extends Component {
         let addUrl = imgResponse.data.payload.link;
         this.setState({url: addUrl});
 
+        let cardId = window.sessionStorage.getItem("cardId");
+
+        let balance = await axios.get(
+            "http://localhost:4000/client/balance",
+            {
+                withCredentials: true,
+                headers: {
+                    'x-access-token': token,
+                    'cardId': cardId,
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            }
+        );
+
+        if(balance.status ==200)
+        {
+            this.setState({"payload": balance.data.payload + " pln"});
+        }
+
+
+
+        console.log(balance);
     }
 
     render() {
@@ -45,7 +69,7 @@ class V6 extends Component {
                         </div>
                         <div className="col-4">
                             <div class="form-group">
-                                <input placeholder="Saldo konta" type="text" maxlength="4" id="saldo" disabled></input>
+                                <input placeholder="Saldo konta" type="text" id="saldo" value={this.state.payload} disabled></input>
                             </div>
                         </div>
                         <div className="col-4">

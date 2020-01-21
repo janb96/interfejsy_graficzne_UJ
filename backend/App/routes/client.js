@@ -30,20 +30,28 @@ router.get('/', TokenValidator, function (req, res, next) {
 
 router.get('/balance', TokenValidator, function (req, res, next) {
     let cardId = req.cardId;
+    console.log("0");
+    console.log(cardId);
 
     ClientModel
         .findOne({cardId: cardId}, function (error, client) {
             if (error) {
+                console.log("1");
+
                 ApiUtils.sendApiError(res, 500, error.message);
                 return;
             }
 
             if (!client) {
+                console.log("2");
+                console.log(cardId);
                 ApiUtils.sendApiError(res, 500, "Could not get client with card ID = " + cardId + " from credit cards providers databases");
                 return;
             }
 
             if (!client.isActive) {
+                console.log("3");
+
                 ApiUtils.sendApiError(res, 500, "Your card is not active.");
                 return;
             }
