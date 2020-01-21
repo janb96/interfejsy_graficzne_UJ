@@ -17,6 +17,13 @@ class V10_simple extends Component {
         }
     }
 
+    async wait() {
+        let promise = new Promise((resolve, reject) => {
+            setTimeout(() => this.props.history.push('/V11'), 5000)
+          });
+
+    }
+
     async componentDidMount() {
         let token = this.state.token;
         let imgResponse = await axios.get(
@@ -32,6 +39,8 @@ class V10_simple extends Component {
         );
         let addUrl = imgResponse.data.payload.link;
         this.setState({url: addUrl});
+
+        this.wait();
 
     }
 
