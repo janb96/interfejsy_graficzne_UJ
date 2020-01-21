@@ -52,7 +52,7 @@ class V3 extends Component {
     render() {
         return (
             <div id="root">
-                <div id="reklama50">
+                <div id="reklama25">
                     <img src={this.state.url}></img>
                 </div>
                 <div id="dol75">
