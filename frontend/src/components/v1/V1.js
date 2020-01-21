@@ -7,7 +7,8 @@ class V1 extends Component {
     constructor(props) {
         super();
         this.state = {
-            pinCode: ""
+            pinCode: "",
+            url: ""
         };
         this.handleChange = this.handleChange.bind(this);
         this.postData = this.postData.bind(this);
@@ -18,8 +19,11 @@ class V1 extends Component {
         }
     }
 
-    componentDidMount() {
+    async componentDidMount() {
 
+        let imgResponse = await axios.get("http://localhost:4000/advert");
+        let addUrl = imgResponse.data.payload.link;
+        this.setState({url: addUrl});
         
     }
 
@@ -66,7 +70,7 @@ class V1 extends Component {
         return (
             <div id="root">
                 <div id="reklama50">
-                    <h1 className="display-1">REKLAMA</h1>
+                    <img src={this.state.url}></img>
                 </div>
                 <div id="dol50">
                     <br/>
