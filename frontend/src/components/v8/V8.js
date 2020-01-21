@@ -1,15 +1,24 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom";
 import axios from 'axios';
+import swal from "sweetalert";
 
 class V8 extends Component {
 
-    constructor() {
+    constructor(props) {
         super();
         this.state = {
             token: window.sessionStorage.getItem("token"),
-            url: ""
+            url: "",
+            price: ""
         };
+        this.handleChange = this.handleChange.bind(this);
+        this.payout = this.payout.bind(this);
+
+        if (window.sessionStorage.getItem("token") == null) {
+            swal("Musisz być zalogowany");
+            props.history.push('/');
+        }
     }
 
     async componentDidMount() {
@@ -31,6 +40,48 @@ class V8 extends Component {
 
     }
 
+    handleChange(event){
+        this.setState({price: event.target.value});
+    }
+
+    payout()
+    {
+        const data = {
+            amount: this.state.price
+        };
+        let token = window.sessionStorage.getItem("token");
+        let cardId = window.sessionStorage.getItem("cardId");
+
+        console.log(token);
+        console.log(cardId);
+
+
+        fetch('http://localhost:4000/atm/withdraw', {
+            method: 'POST',
+            headers: {
+                'x-access-token': token,
+                'cardId': cardId,
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            credentials: 'include',
+            body: JSON.stringify(data)
+        }).then(r=>r.json())
+            .then(r=> {
+                if(r.payload == true)
+                {
+                    //swal("Transakcja pomyślnie zaakceptowana");
+                    this.props.history.push('/V10');
+
+                }
+                else
+                {
+                    swal("Błąd wypłaty - spróbuj ponownie później");
+                }
+            });
+    }
+
+
     render() {
         return (
             <div id="root">
@@ -43,7 +94,7 @@ class V8 extends Component {
                     <br/>
                     <br/>
                     <div>
-                        <input type="number" min="0.01" step="0.01" max="100000" placeholder="Podaj kwotę" /> PLN
+                        <input  onChange={this.handleChange}  type="number" min="0.01" step="0.01" max="100000" placeholder="Podaj kwotę" /> PLN
                     </div>
                     <br/>
                     <br/>
@@ -56,7 +107,7 @@ class V8 extends Component {
                             <div className="col-4">
                             </div>
                             <div className="col-4">
-                                <Link to={'/v10'}><button type="button" className="btn btn-success btn-lg btn-block"><h1>Zatwierdź</h1></button></Link>
+                                <button type="button" onClick={this.payout} className="btn btn-success btn-lg btn-block"><h1>Zatwierdź</h1></button>
                             </div>
                         </div>
                     </div>

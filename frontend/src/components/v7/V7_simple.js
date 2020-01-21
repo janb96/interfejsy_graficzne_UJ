@@ -5,7 +5,7 @@ import swal from 'sweetalert';
 
 class V7 extends Component {
 
-    constructor() {
+    constructor(props) {
         super();
         this.state = {
             token: window.sessionStorage.getItem("token"),
@@ -18,7 +18,10 @@ class V7 extends Component {
         this.payout500 = this.payout500.bind(this);
         this.payout = this.payout.bind(this);
 
-
+        if (window.sessionStorage.getItem("token") == null) {
+            swal("Musisz być zalogowany");
+            props.history.push('/');
+        }
     }
 
 

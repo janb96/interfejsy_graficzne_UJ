@@ -10,6 +10,8 @@ class V11_simple extends Component {
             token: window.sessionStorage.getItem("token"),
             url: ""
         };
+        window.sessionStorage.removeItem("token");
+
     }
 
     async componentDidMount() {

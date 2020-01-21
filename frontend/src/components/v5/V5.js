@@ -2,15 +2,20 @@ import React, {Component} from 'react';
 import { withRouter } from 'react-router-dom';
 import {Link} from "react-router-dom";
 import axios from 'axios';
+import swal from "sweetalert";
 
 class V5 extends Component {
 
-    constructor() {
+    constructor(props) {
         super();
         this.state = {
             token: window.sessionStorage.getItem("token"),
             url: ""
         };
+        if (window.sessionStorage.getItem("token") == null) {
+            swal("Musisz być zalogowany");
+            props.history.push('/');
+        }
     }
 
     async componentDidMount() {
