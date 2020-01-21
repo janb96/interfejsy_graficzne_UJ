@@ -5,6 +5,7 @@ let ApiUtils = require('./ApiUtils');
 
 function verifyToken(req, res, next) {
     let token = req.headers['x-access-token'];
+    console.log("t: " +token);
 
     if (!token) {
         res

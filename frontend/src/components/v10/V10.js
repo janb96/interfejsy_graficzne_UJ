@@ -9,6 +9,8 @@ class V10 extends Component {
             token: window.sessionStorage.getItem("token"),
             url: ""
         };
+
+
     }
 
     async componentDidMount() {
@@ -26,6 +28,11 @@ class V10 extends Component {
         );
         let addUrl = imgResponse.data.payload.link;
         this.setState({url: addUrl});
+
+        this.timer = setInterval(
+            () => this.props.history.push('/V11'),
+            5000,
+        );
 
     }
 

@@ -51,7 +51,8 @@ class V1 extends Component {
                 if(r.type === "token")
                 {
                     window.sessionStorage.setItem("token", r.payload);
-                    window.sessionStorage.setItem("cardId", r.payload);
+                    window.sessionStorage.setItem("cardId", data.cardId);
+                    console.log("req id " + window.sessionStorage.getItem("cardId"));
                     this.props.history.push('/V3');
                 }
                 else

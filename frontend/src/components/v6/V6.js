@@ -30,7 +30,7 @@ class V6 extends Component {
         this.setState({url: addUrl});
 
         let cardId = window.sessionStorage.getItem("cardId");
-
+        console.log("req id " + cardId);
         let balance = await axios.get(
             "http://localhost:4000/client/balance",
             {

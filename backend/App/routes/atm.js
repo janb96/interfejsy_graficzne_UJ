@@ -97,10 +97,10 @@ router.post('/withdraw', TokenValidator, function (req, res, next) {
                             todayMoney += log.amount;
                         }
 
-                        if (todayDays === client.limits.transactionPerDay) {
-                            ApiUtils.sendApiError(res, 500, "Exceed limit of transaction per day: " + todayDays);
-                            return;
-                        }
+                        // if (todayDays === client.limits.transactionPerDay) {
+                        //     ApiUtils.sendApiError(res, 500, "Exceed limit of transaction per day: " + todayDays);
+                        //     return;
+                        // }
 
                         if (todayMoney > client.limits.moneyInOneDay) {
                             ApiUtils.sendApiError(res, 500, "Exceed limit of amount of money per day: " + todayMoney);
