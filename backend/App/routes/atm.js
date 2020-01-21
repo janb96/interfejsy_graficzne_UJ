@@ -137,7 +137,7 @@ router.post('/withdraw', TokenValidator, function (req, res, next) {
                                 let withdrawResult = ATMUtils.withdraw(amount, availableMoneyArray);
 
                                 if (withdrawResult[0] === false) {
-                                    ApiUtils.sendApiError(res, 500, "Error during withdraw");
+                                    ApiUtils.sendApiError(res, 500, "There is no enough money in ATM!");
                                     return;
                                 }
 
