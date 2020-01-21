@@ -19,6 +19,12 @@ input {
   text-align: center; 
 }
 
+img {
+    width: 100%; /* or any custom size */
+    height: 100%; 
+    object-fit: contain;
+}
+
 #reklama75 {
 	background-color: #E3E3E3;
 	height: 75%;

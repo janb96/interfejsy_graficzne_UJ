@@ -7,11 +7,15 @@ class Home extends Component {
     constructor() {
         super();
         this.state = {
+            url:""
         };
     }
 
-    componentDidMount() {
+    async componentDidMount() {
 
+        let imgResponse = await axios.get("http://localhost:4000/advert");
+        let addUrl = imgResponse.data.payload.link;
+        this.setState({url: addUrl});
         
     }
 
@@ -19,7 +23,7 @@ class Home extends Component {
         return (
             <div id="root">
                 <div id="reklama75">
-                    <h1 className="display-1">REKLAMA</h1>
+                    <img src={this.state.url}></img>
                 </div>
                 <div id="dol25">
                     <h1 className="display-1">Wprowadź kartę</h1>
