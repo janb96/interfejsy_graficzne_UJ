@@ -41,18 +41,16 @@ class V5 extends Component {
         if( this.state.pinCode != this.state.pinCode2 ) {
             swal("Podane kody pin nie są takie same");
         } else {
-            let response = await axios.patch(
+
+            axios.defaults.headers.post['x-access-token'] = token;
+            axios.defaults.headers.post['Accept'] = "application/json";
+            axios.defaults.headers.post['Content-Type'] = "application/json";
+            axios.defaults.withCredentials = true;
+
+            let response = await axios.post(
                 "http://localhost:4000/client/card/pin", 
                 {
-                    withCredentials: true,
-                    headers: {
-                        'x-access-token': token,
-                        'Accept' : 'application/json',
-                        'Content-Type': 'application/json'
-                    },
-                    body: {
-                        newPinCode: this.state.pinCode
-                    }
+                    newPinCode: this.state.pinCode
                 }
             ).then(this.props.history.push('/v3'));
         }

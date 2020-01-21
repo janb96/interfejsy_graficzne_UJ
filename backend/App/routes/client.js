@@ -73,7 +73,7 @@ router.get('/balance', TokenValidator, function (req, res, next) {
         });
 });
 
-router.patch('/card/pin', TokenValidator, function (req, res, next) {
+router.post('/card/pin', TokenValidator, function (req, res, next) {
     let cardId = req.cardId;
 
     let newPinCode = req.body.newPinCode;
