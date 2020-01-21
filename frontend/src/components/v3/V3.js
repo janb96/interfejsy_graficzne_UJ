@@ -8,6 +8,7 @@ class V3 extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            token: window.sessionStorage.getItem("token"),
             url: ""
         };
 
@@ -21,7 +22,7 @@ class V3 extends Component {
     async componentDidMount() {
         let token = this.state.token;
         let imgResponse = await axios.get(
-            "http://localhost:4000/advert/personalized",
+            "http://localhost:4000/advert/personalized", 
             {
                 withCredentials: true,
                 headers: {

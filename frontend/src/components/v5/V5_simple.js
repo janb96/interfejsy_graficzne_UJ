@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { withRouter } from 'react-router-dom';
 import {Link} from "react-router-dom";
+import axios from 'axios';
 
 class V5_simple extends Component {
 
