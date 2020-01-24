@@ -16,7 +16,7 @@ router.get('/', function (req, res, next) {
             }
 
             if (adverts < 1) {
-                ApiUtils.sendApiError(res, 500, "There is no adverts");
+                ApiUtils.sendApiError(res, 500, "Nie ma żadnych reklam do wyświetlenia");
             }
 
             let randomAdvert = Math.floor(Math.random() * adverts);
@@ -31,7 +31,7 @@ router.get('/', function (req, res, next) {
                     }
 
                     if (!advert) {
-                        ApiUtils.sendApiError(res, 500, "Could not get advert");
+                        ApiUtils.sendApiError(res, 500, "Błąd wewnętrzny: nie udało sie pobrać reklamy");
                         return;
                     }
 
@@ -51,7 +51,7 @@ router.get('/personalized', TokenValidator, function (req, res, next) {
             }
 
             if (!client) {
-                ApiUtils.sendApiError(res, 500, "Could not get client with card ID = " + cardId + " from credit cards providers databases");
+                ApiUtils.sendApiError(res, 500, "Nie udało się pobrać danych karty " + cardId);
                 return;
             }
 
@@ -69,7 +69,7 @@ router.get('/personalized', TokenValidator, function (req, res, next) {
                         }
 
                         if (!adverts) {
-                            ApiUtils.sendApiError(res, 500, "Could not get personalized advert");
+                            ApiUtils.sendApiError(res, 500, "Błąd wewnętrzny: nie udało sie pobrać spersonalizowanej reklamy");
                             return;
                         }
 

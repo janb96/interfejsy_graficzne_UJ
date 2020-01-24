@@ -11,7 +11,7 @@ router.post('/', TokenValidator, function (req, res, next) {
     let amount = req.body.amount;
 
     if (type === undefined) {
-        ApiUtils.sendApiError(res, 500, "Field 'type' count not be empty");
+        ApiUtils.sendApiError(res, 500, "Pole 'type' nie może być puste");
         return;
     }
 

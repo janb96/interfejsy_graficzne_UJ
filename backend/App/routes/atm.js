@@ -17,27 +17,27 @@ router.post('/withdraw', TokenValidator, function (req, res, next) {
     let amount = req.body.amount;
 
     if (amount === undefined) {
-        ApiUtils.sendApiError(res, 500, "Field 'amount' could not be empty!");
+        ApiUtils.sendApiError(res, 500, "Pole 'amount' nie może być puste");
         return;
     }
 
     if (!/^\d+$/.test(amount)) {
-        ApiUtils.sendApiError(res, 500, "Field 'amount' has to number!");
+        ApiUtils.sendApiError(res, 500, "Pole 'amount' musi być liczbą");
         return;
     }
 
     if (amount < config.minWithdraw) {
-        ApiUtils.sendApiError(res, 500, "Field 'amount' has to be minimum " + config.minWithdraw);
+        ApiUtils.sendApiError(res, 500, "Pole 'amount' musi mieć minimum " + config.minWithdraw);
         return;
     }
 
     if (amount > config.maxWithdraw) {
-        ApiUtils.sendApiError(res, 500, "Field 'amount' has to be maximum " + config.maxWithdraw);
+        ApiUtils.sendApiError(res, 500, "Pole 'amount' może być maksymalnie " + config.maxWithdraw);
         return;
     }
 
     if (amount % config.minDenomination !== 0) {
-        ApiUtils.sendApiError(res, 500, "Field 'amount' has to be factor of " + config.minDenomination);
+        ApiUtils.sendApiError(res, 500, "Pole 'amount' musi być dzielnikiem " + config.minDenomination);
         return;
     }
 
@@ -49,12 +49,12 @@ router.post('/withdraw', TokenValidator, function (req, res, next) {
             }
 
             if (!client) {
-                ApiUtils.sendApiError(res, 500, "Could not get client with card ID = " + cardId + " from credit cards providers databases");
+                ApiUtils.sendApiError(res, 500, "Nie udało się pobrać danych karty " + cardId);
                 return;
             }
 
             if (!client.isActive) {
-                ApiUtils.sendApiError(res, 500, "Your card is not active.");
+                ApiUtils.sendApiError(res, 500, "Twoja karta nie jest aktywna");
                 return;
             }
 
@@ -62,12 +62,12 @@ router.post('/withdraw', TokenValidator, function (req, res, next) {
             let moneyInOneTransactionLimit = client.limits.moneyInOneTransaction;
 
             if (amount > balance) {
-                ApiUtils.sendApiError(res, 500, "You do not have enough money on your account");
+                ApiUtils.sendApiError(res, 500, "Nie masz wystarczających środków na koncie");
                 return;
             }
 
             if (amount > moneyInOneTransactionLimit) {
-                ApiUtils.sendApiError(res, 500, "Demand amount is above limit: money per transaction is " + moneyInOneTransactionLimit);
+                ApiUtils.sendApiError(res, 500, "Wybrana kwota jest powyżej limity: maksymalna kwota transakcji " + moneyInOneTransactionLimit);
                 return;
             }
 
@@ -98,12 +98,12 @@ router.post('/withdraw', TokenValidator, function (req, res, next) {
                         }
 
                         if (todayDays === client.limits.transactionPerDay) {
-                            ApiUtils.sendApiError(res, 500, "Exceed limit of transaction per day: " + todayDays);
+                            ApiUtils.sendApiError(res, 500, "Przekroczono dzienny limit transakcji: " + todayDays);
                             return;
                         }
 
                         if (todayMoney > client.limits.moneyInOneDay) {
-                            ApiUtils.sendApiError(res, 500, "Exceed limit of amount of money per day: " + todayMoney);
+                            ApiUtils.sendApiError(res, 500, "Przekroczono dzienny limit kwotowy transakcji: " + todayMoney);
                             return;
                         }
 
@@ -115,7 +115,7 @@ router.post('/withdraw', TokenValidator, function (req, res, next) {
                                 }
 
                                 if (atm.length !== 1) {
-                                    ApiUtils.sendApiError(res, 500, "Error during withdraw");
+                                    ApiUtils.sendApiError(res, 500, "Bład wewnętrzny: nie udało się wypłacić pieniędzy");
                                     return;
                                 }
 
@@ -128,7 +128,7 @@ router.post('/withdraw', TokenValidator, function (req, res, next) {
                                 let sum = count_50 * 50 + count_100 * 100 + count_200 * 200 + count_500 * 500;
 
                                 if (amount > sum) {
-                                    ApiUtils.sendApiError(res, 500, "There is no enough money in ATM!");
+                                    ApiUtils.sendApiError(res, 500, "Nie ma wystarczających środków w bankomacie");
                                     return;
                                 }
 
@@ -137,7 +137,7 @@ router.post('/withdraw', TokenValidator, function (req, res, next) {
                                 let withdrawResult = ATMUtils.withdraw(amount, availableMoneyArray);
 
                                 if (withdrawResult[0] === false) {
-                                    ApiUtils.sendApiError(res, 500, "There is no enough money in ATM!");
+                                    ApiUtils.sendApiError(res, 500, "Nie ma wystarczających środków w bankomacie");
                                     return;
                                 }
 
@@ -152,7 +152,7 @@ router.post('/withdraw', TokenValidator, function (req, res, next) {
                                             }
 
                                             if (data.nModified !== 1) {
-                                                ApiUtils.sendApiError(res, 500, "Error during withdraw");
+                                                ApiUtils.sendApiError(res, 500, "Bład wewnętrzny: nie udało się wypłacić pieniędzy");
                                                 return;
                                             }
 
@@ -174,7 +174,7 @@ router.post('/withdraw', TokenValidator, function (req, res, next) {
                                                         }
 
                                                         if (data.nModified !== 1) {
-                                                            ApiUtils.sendApiError(res, 500, "Error during withdraw");
+                                                            ApiUtils.sendApiError(res, 500, "Bład wewnętrzny: nie udało się wypłacić pieniędzy");
                                                             return;
                                                         }
 

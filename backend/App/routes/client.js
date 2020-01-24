@@ -20,7 +20,7 @@ router.get('/', TokenValidator, function (req, res, next) {
             }
 
             if (!client) {
-                ApiUtils.sendApiError(res, 500, "Could not get client with card ID = " + cardId + " from credit cards providers databases");
+                ApiUtils.sendApiError(res, 500, "Nie udało się pobrać danych karty " + cardId);
                 return;
             }
 
@@ -30,29 +30,21 @@ router.get('/', TokenValidator, function (req, res, next) {
 
 router.get('/balance', TokenValidator, function (req, res, next) {
     let cardId = req.cardId;
-    console.log("0");
-    console.log(cardId);
 
     ClientModel
         .findOne({cardId: cardId}, function (error, client) {
             if (error) {
-                console.log("1");
-
                 ApiUtils.sendApiError(res, 500, error.message);
                 return;
             }
 
             if (!client) {
-                console.log("2");
-                console.log(cardId);
-                ApiUtils.sendApiError(res, 500, "Could not get client with card ID = " + cardId + " from credit cards providers databases");
+                ApiUtils.sendApiError(res, 500, "Nie udało się pobrać danych karty " + cardId);
                 return;
             }
 
             if (!client.isActive) {
-                console.log("3");
-
-                ApiUtils.sendApiError(res, 500, "Your card is not active.");
+                ApiUtils.sendApiError(res, 500, "Twoja karta nie jest aktywna");
                 return;
             }
 
@@ -79,22 +71,22 @@ router.post('/card/pin', TokenValidator, function (req, res, next) {
     let newPinCode = req.body.newPinCode;
 
     if (newPinCode === undefined) {
-        ApiUtils.sendApiError(res, 500, "Field 'newPinCode' could not be empty!");
+        ApiUtils.sendApiError(res, 500, "Pole 'newPinCode' nie może być puste");
         return;
     }
 
     if (!/^\d+$/.test(newPinCode)) {
-        ApiUtils.sendApiError(res, 500, "Field 'newPinCode' has to have only digits!");
+        ApiUtils.sendApiError(res, 500, "Pole 'newPinCode' musi zawierać wyłącznie cyfry");
         return;
     }
 
     if (newPinCode.toString().length < config.minPinDigits) {
-        ApiUtils.sendApiError(res, 500, "Field 'newPinCode' has to have minimum " + config.minPinDigits + " digits!");
+        ApiUtils.sendApiError(res, 500, "Pole 'newPinCode' musi mieć minimum " + config.minPinDigits + " znaków");
         return;
     }
 
     if (newPinCode.toString().length > config.maxPinDigits) {
-        ApiUtils.sendApiError(res, 500, "Field 'newPinCode' has to have maximum " + config.maxPinDigits + " digits!");
+        ApiUtils.sendApiError(res, 500, "Pole 'newPinCode' może mieć maksymalnie " + config.maxPinDigits + " znaków");
         return;
     }
 
@@ -106,12 +98,12 @@ router.post('/card/pin', TokenValidator, function (req, res, next) {
             }
 
             if (!client) {
-                ApiUtils.sendApiError(res, 500, "Could not get client with card ID = " + cardId + " from credit cards providers databases");
+                ApiUtils.sendApiError(res, 500, "Nie udało się pobrać danych karty " + cardId);
                 return;
             }
 
             if (!client.isActive) {
-                ApiUtils.sendApiError(res, 500, "Card is not active.");
+                ApiUtils.sendApiError(res, 500, "Twoja karta nie jest aktywna");
                 return;
             }
 
@@ -126,7 +118,7 @@ router.post('/card/pin', TokenValidator, function (req, res, next) {
                         }
 
                         if (data.nModified !== 1) {
-                            ApiUtils.sendApiError(res, 500, "PIN code was not changed.");
+                            ApiUtils.sendApiError(res, 500, "Błąd wewnętrzny: nie udało się zmienić numeru PIN");
                             return;
                         }
 
@@ -154,22 +146,22 @@ router.post('/card/activate', TokenValidator, function (req, res, next) {
     let newPinCode = req.body.newPinCode;
 
     if (newPinCode === undefined) {
-        ApiUtils.sendApiError(res, 500, "Field 'newPinCode' could not be empty!");
+        ApiUtils.sendApiError(res, 500, "Pole 'newPinCode' nie może być puste");
         return;
     }
 
     if (!/^\d+$/.test(newPinCode)) {
-        ApiUtils.sendApiError(res, 500, "Field 'newPinCode' has to have only digits!");
+        ApiUtils.sendApiError(res, 500, "Pole 'newPinCode' musi mieć wyłącznie cyfry");
         return;
     }
 
     if (newPinCode.toString().length < config.minPinDigits) {
-        ApiUtils.sendApiError(res, 500, "Field 'newPinCode' has to have minimum " + config.minPinDigits + " digits!");
+        ApiUtils.sendApiError(res, 500, "Pole 'newPinCode' musi mieć minumum " + config.minPinDigits + " znaków");
         return;
     }
 
     if (newPinCode.toString().length > config.maxPinDigits) {
-        ApiUtils.sendApiError(res, 500, "Field 'newPinCode' has to have maximum " + config.maxPinDigits + " digits!");
+        ApiUtils.sendApiError(res, 500, "Pole 'newPinCode' może mieć maksymalnie " + config.maxPinDigits + " znaków");
         return;
     }
 
@@ -181,12 +173,12 @@ router.post('/card/activate', TokenValidator, function (req, res, next) {
             }
 
             if (!client) {
-                ApiUtils.sendApiError(res, 500, "Could not get client with card ID = " + cardId + " from credit cards providers databases");
+                ApiUtils.sendApiError(res, 500, "Nie udało się pobrać danych karty " + cardId);
                 return;
             }
 
             if (client.isActive) {
-                ApiUtils.sendApiError(res, 500, "Card was activated already.");
+                ApiUtils.sendApiError(res, 500, "Twoja karta jest już aktywna");
                 return;
             }
 
@@ -204,7 +196,7 @@ router.post('/card/activate', TokenValidator, function (req, res, next) {
                         }
 
                         if (data.nModified !== 1) {
-                            ApiUtils.sendApiError(res, 500, "Error during card activation");
+                            ApiUtils.sendApiError(res, 500, "Błąd wewnętrzny: nie udało się aktywować karty");
                             return;
                         }
 

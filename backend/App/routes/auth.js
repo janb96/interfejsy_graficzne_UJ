@@ -13,37 +13,37 @@ router.post('/authenticate', function (req, res, next) {
     let pinCode = req.body.pinCode;
 
     if (cardId === undefined) {
-        ApiUtils.sendApiError(res, 500, "Field 'cardId' could not be empty!");
+        ApiUtils.sendApiError(res, 500, "Pole 'cardId' nie może być puste");
         return;
     }
 
     if (cardId.length !== 16) {
-        ApiUtils.sendApiError(res, 500, "Field 'cardId' has to have 16 chars!");
+        ApiUtils.sendApiError(res, 500, "Pole 'cardId' musi mieć 16 znaków");
         return;
     }
 
     if (!/^\d+$/.test(cardId)) {
-        ApiUtils.sendApiError(res, 500, "Field 'cardId' has to have only digits!");
+        ApiUtils.sendApiError(res, 500, "Pole 'cardId' musi mieć wyłącznie cyfry");
         return;
     }
 
     if (pinCode === undefined) {
-        ApiUtils.sendApiError(res, 500, "Field 'pinCode' could not be empty!");
+        ApiUtils.sendApiError(res, 500, "Pole 'pinCode' nie może być puste");
         return;
     }
 
     if (!/^\d+$/.test(pinCode)) {
-        ApiUtils.sendApiError(res, 500, "Field 'pinCode' has to have only digits!");
+        ApiUtils.sendApiError(res, 500, "Pole 'pinCode' musi mieć wyłącznie cyfry");
         return;
     }
 
     if (pinCode.toString().length < config.minPinDigits) {
-        ApiUtils.sendApiError(res, 500, "Field 'pinCode' has to have minimum " + config.minPinDigits + " digits!");
+        ApiUtils.sendApiError(res, 500, "Pole 'pinCode' musi mieć minimum " + config.minPinDigits + " znaków");
         return;
     }
 
     if (pinCode.toString().length > config.maxPinDigits) {
-        ApiUtils.sendApiError(res, 500, "Field 'pinCode' has to have maximum " + config.maxPinDigits + " digits!");
+        ApiUtils.sendApiError(res, 500, "Pole 'pinCode' może mieć maksymalnie " + config.maxPinDigits + " znaków");
         return;
     }
 
@@ -55,17 +55,17 @@ router.post('/authenticate', function (req, res, next) {
             }
 
             if (!client) {
-                ApiUtils.sendApiError(res, 500, "Could not get client with card ID = " + cardId + " from credit cards providers databases");
+                ApiUtils.sendApiError(res, 500, "Nie udało się pobrać danych karty " + cardId);
                 return;
             }
 
             if (client.isBlocked) {
-                ApiUtils.sendApiError(res, 500, "Card " + cardId + " is blocked. Card will be lock in ATM.");
+                ApiUtils.sendApiError(res, 500, "Karta " + cardId + " jest zablokowana. Zostanie zablokowana w bankomacie");
                 return;
             }
 
             if (new Date(client.expirationDate) < new Date()) {
-                ApiUtils.sendApiError(res, 500, "Your card expired.");
+                ApiUtils.sendApiError(res, 500, "Twoja karta wygasła");
                 return;
             }
 
@@ -73,7 +73,7 @@ router.post('/authenticate', function (req, res, next) {
                 console.log(pinCode);
                 console.log(client.pinCode);
 
-                ApiUtils.sendApiError(res, 500, "PIN code is invalid.");
+                ApiUtils.sendApiError(res, 500, "Kod PIN jest błędny");
                 return;
             }
 
@@ -95,7 +95,5 @@ router.post('/authenticate', function (req, res, next) {
             });
         });
 });
-
-
 
 module.exports = router;
