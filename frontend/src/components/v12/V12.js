@@ -5,6 +5,7 @@ import swal from "sweetalert";
 
 class V12 extends Component {
 
+
     constructor(props) {
         super();
         this.state = {

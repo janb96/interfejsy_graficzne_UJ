@@ -10,14 +10,21 @@ class V1 extends Component {
         this.state = {
             pinCode: "",
             url: "",
-            cardId: ""
+            cardId: "",
+            accessible: "true"
         };
         this.handleChange = this.handleChange.bind(this);
         this.postData = this.postData.bind(this);
 
         if (window.sessionStorage.getItem("token") != null) {
             swal("Już wprowadziłeś PIN. Ta strona jest dla ciebie niedostępna");
+            this.state = {accessible: "false"};
             props.history.push('/V3');
+        }
+        else
+        {
+            this.state = {accessible: "true"};
+
         }
 
     }
@@ -27,8 +34,12 @@ class V1 extends Component {
         let imgResponse = await axios.get("http://localhost:4000/advert");
         let addUrl = imgResponse.data.payload.link;
         this.setState({url: addUrl});
-        const enteredCardId = prompt('Numer karty:');
-        this.setState({"cardId": enteredCardId});
+        if(this.state.accessible === "true")
+        {
+            const enteredCardId = prompt('Numer karty:');
+            this.setState({"cardId": enteredCardId});
+        }
+
     }
 
      postData(){
