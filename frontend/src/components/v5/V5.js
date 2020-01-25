@@ -52,7 +52,14 @@ class V5 extends Component {
                 {
                     newPinCode: this.state.pinCode
                 }
-            ).then(this.props.history.push('/v3'));
+            ).then(r=>{
+                    this.props.history.push('/v12');
+                }
+            ).catch(r=>{
+                if(r.response != undefined) {
+                    let promise = swal(r.response.data.payload);
+                }
+            });
         }
 
     }
