@@ -73,7 +73,12 @@ class V7 extends Component {
                 }
                 else
                 {
-                    swal("Błąd wypłaty - podaj poprawną kwotę spróbuj ponownie później");
+                    this.props.history.push({
+                        pathname:"/v13",
+                        state:{
+                            errMsg: r.payload
+                        }
+                    });
                 }
             });
     }
