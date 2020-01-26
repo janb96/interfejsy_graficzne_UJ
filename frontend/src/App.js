@@ -25,6 +25,10 @@ import V12 from './components/v12/V12';
 import V12_simple from './components/v12/V12_simple';
 import V13 from './components/v13/V13';
 import V13_simple from './components/v13/V13_simple';
+import V14 from './components/v14/V14';
+import V14_simple from './components/v14/V14_simple';
+import V15 from './components/v15/V15';
+import V15_simple from './components/v15/V15_simple';
 
 //https://onedrive.live.com/?authkey=%21AHKkFUYexN9ih%5FU&cid=9FFB083ADCCEB07E&id=9FFB083ADCCEB07E%2186803&parId=9FFB083ADCCEB07E%2186797&o=OneUp
 
@@ -58,6 +62,10 @@ class App extends Component {
             <Route exact path='/v13' component={V13}/>
             <Route exact path='/v12-simple' component={V12_simple}/>
             <Route exact path='/v13-simple' component={V13_simple}/>
+            <Route exact path='/v14' component={V14}/>
+            <Route exact path='/v15' component={V15}/>
+            <Route exact path='/v14-simple' component={V14_simple}/>
+            <Route exact path='/v15-simple' component={V15_simple}/>
           </Switch>
         </BrowserRouter>
     );

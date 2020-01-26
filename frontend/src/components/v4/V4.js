@@ -47,33 +47,41 @@ class V4 extends Component {
 
     }
 
-    activateCard()
+    async activateCard()
     {
-        let pinCode1 = this.state.pinCode1;
-        let pinCode2 = this.state.pinCode2;
+        //let pinCode1 = this.state.pinCode1;
+        //let pinCode2 = this.state.pinCode2;
 
-        console.log(pinCode1);
-        console.log(pinCode2);
+        let token = this.state.token;
+        console.log(token);
 
-        if(pinCode1 == undefined || pinCode2 == undefined)
-        {
-            swal("Podaj kod Pin w obu polach.")
-        }
-        else
-        if(pinCode2 !== pinCode1 )
-        {
-            swal("W obu polach musi być ten sam kod Pin")
-        }
-        else
-        {
-            const data = {
-                pinCode: pinCode1
-            };
+        if( this.state.pinCode1 != this.state.pinCode2 ) {
+            swal("Podane kody pin nie są takie same");
+        } else {
 
+            axios.defaults.headers.post['x-access-token'] = token;
+            axios.defaults.headers.post['Accept'] = "application/json";
+            axios.defaults.headers.post['Content-Type'] = "application/json";
+            axios.defaults.withCredentials = true;
 
-
-
-
+            let response = await axios.post(
+                "http://localhost:4000/client/card/activate",
+                {
+                    newPinCode: this.state.pinCode1
+                }
+            ).then(r=>{
+                    this.props.history.push('/v14');
+                }
+            ).catch(r=>{
+                if(r.response != undefined) {
+                    this.props.history.push({
+                        pathname:"/v15",
+                        state:{
+                            errMsg: r.response.data.payload
+                        }
+                    });
+                }
+            });
         }
     }
 
