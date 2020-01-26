@@ -23,6 +23,7 @@ import V11 from './components/v11/V11';
 import V11_simple from './components/v11/V11_simple';
 import V12 from './components/v12/V12';
 import V12_simple from './components/v12/V12_simple';
+import V13_simple from './components/v13/V13_simple';
 
 //https://onedrive.live.com/?authkey=%21AHKkFUYexN9ih%5FU&cid=9FFB083ADCCEB07E&id=9FFB083ADCCEB07E%2186803&parId=9FFB083ADCCEB07E%2186797&o=OneUp
 
@@ -54,6 +55,7 @@ class App extends Component {
             <Route exact path='/v11-simple' component={V11_simple}/>
             <Route exact path='/v12' component={V12}/>
             <Route exact path='/v12-simple' component={V12_simple}/>
+            <Route exact path='/v13-simple' component={V13_simple}/>
           </Switch>
         </BrowserRouter>
     );

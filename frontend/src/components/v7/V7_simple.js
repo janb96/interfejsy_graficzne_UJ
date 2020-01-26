@@ -62,7 +62,13 @@ class V7 extends Component {
                 }
                 else
                 {
-                    swal("Błąd wypłaty - podaj poprawną kwotę lub spróbuj ponownie później");
+
+                    this.props.history.push({
+                        pathname:"/v13-simple",
+                        state:{
+                            errMsg: r.payload
+                        }
+                    });
                 }
             });
     }
