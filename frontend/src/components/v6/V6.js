@@ -47,9 +47,18 @@ class V6 extends Component {
                     'Content-Type': 'application/json'
                 }
             }
-        );
+        ).catch(r=>{
+            if(r.response != undefined) {
+                this.props.history.push({
+                    pathname:"/v16",
+                    state:{
+                        errMsg: r.response.data.payload
+                    }
+                });
+            }
+        });
 
-        if(balance.status ==200)
+        if(balance != undefined && balance.status ==200)
         {
             this.setState({"payload": balance.data.payload + " pln"});
         }
