@@ -107,6 +107,11 @@ router.post('/card/pin', TokenValidator, function (req, res, next) {
                 return;
             }
 
+            if (client.pinCode == newPinCode) {
+                ApiUtils.sendApiError(res, 500, "Numer PIN musi byc inny od poprzedniego");
+                return;
+            }
+
             ClientModel
                 .update(
                     {cardId: cardId},
@@ -179,6 +184,11 @@ router.post('/card/activate', TokenValidator, function (req, res, next) {
 
             if (client.isActive) {
                 ApiUtils.sendApiError(res, 500, "Twoja karta jest już aktywna");
+                return;
+            }
+
+            if (client.pinCode == newPinCode) {
+                ApiUtils.sendApiError(res, 500, "Numer PIN musi byc inny od poprzedniego");
                 return;
             }
 
