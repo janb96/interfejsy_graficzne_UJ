@@ -18,7 +18,7 @@ You will need NPM  => (https://www.npmjs.com)
 
 1.) Change directory to backend
 ```
-cd backend
+cd backend\App
 ```
 2.) Install packages
 ```
